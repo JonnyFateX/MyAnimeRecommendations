@@ -137,8 +137,9 @@ img{
 }
 
 .web-icon{
-  width: 2rem;
-  filter: invert(15%);
+  width: 2.2em;
+  object-fit: cover;
+  scale: 1.5;
 }
 
 h1{
