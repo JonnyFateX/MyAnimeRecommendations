@@ -9,12 +9,24 @@ import { ImCheckmark } from "react-icons/im";
 
 export default function App() {
   const [animes, setAnimes] = React.useState(null)
-  const [selectedAnime, setSelectedAnime] = React.useState([0])
+  const [animeIndex, setAnimeIndex] = React.useState(0)
 
   React.useEffect(()=>{
     getAnimes()
       .then(animeObjects => setAnimes([...animeObjects]))
   }, [])
+
+  function provideNextAnime(action){
+    //Add functionality according to action - pendent
+
+    setAnimeIndex(prevIndex => {
+      if(prevIndex === animes.length - 1){
+        return 0
+      } else{
+        return (prevIndex+1)
+      }
+    })
+  }
 
   return (
     <>
@@ -23,14 +35,14 @@ export default function App() {
         {
         animes?
           <Card
-            {...animes[selectedAnime]}
+            {...animes[animeIndex]}
           >
-            <Button position="bottom-left">
+            <Button position="bottom-left" onClick={() => provideNextAnime()}>
               <Button.Icon color="red">
                 <FaXmark />
               </Button.Icon>
             </Button>
-            <Button position="bottom-right">
+            <Button position="bottom-right" onClick={() => provideNextAnime()}>
               <Button.Icon color="green">
                 <ImCheckmark />
               </Button.Icon>
