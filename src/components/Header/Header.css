@@ -1,0 +1,22 @@
+header{
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    color: #222222;
+    background-color: whitesmoke;
+    border-bottom: 0.5px solid gray;
+    font-family: "Raleway", sans-serif;
+}
+
+@media (max-width:500px){
+    header{
+        justify-content: center;
+    }
+}
+
+@media (min-width:500px){
+    header{
+        padding: 0 1em;
+    }
+}

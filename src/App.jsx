@@ -1,7 +1,7 @@
 import React from 'react'
-import Header from '../src/components/Header.jsx'
-import Card from '../src/components/Card.jsx'
-import Button from '../src/components/Button/index.js'
+import Header from './components/Header/Header.jsx'
+import Card from './components/Card/Card.jsx'
+import Button from './components/Button/index.js'
 import { getAnimes } from './api/api.js'
 
 import { FaXmark } from "react-icons/fa6";
@@ -39,12 +39,12 @@ export default function App() {
           >
             <Button position="bottom-left" onClick={() => provideNextAnime()}>
               <Button.Icon color="red">
-                <FaXmark />
+                <FaXmark/>
               </Button.Icon>
             </Button>
             <Button position="bottom-right" onClick={() => provideNextAnime()}>
               <Button.Icon color="green">
-                <ImCheckmark />
+                <ImCheckmark/>
               </Button.Icon>
             </Button>
           </Card>
