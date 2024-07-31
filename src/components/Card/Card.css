@@ -3,8 +3,8 @@
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    
-    height: 72vh;
+
+    height: 80%;
     min-width: 260px;
     min-height: 500px;
     padding: 1em;
@@ -17,7 +17,7 @@
 
 .card--image{
     width: 100%;
-    min-height: 58vh;
+    min-height: 82%;
     border-radius: 12px;
 }
 
@@ -63,29 +63,30 @@
 }
 /* inside card--info */
 
+
+
 @media (min-width:500px){
     .card{
+        height: 85%;
         max-width: 420px;
+        min-width: 260px;
     }
 }
 
-@media (max-width:500px){
+@media (min-height:700px){
+    .card{
+        max-width: 500px;
+    }
+    .card--image{
+        min-height: 85%;
+    }
+}
+
+@media (max-width:500px) {
     .card{
         height: 78vh;
     }
     .card--info{
         margin-top: 0.5em;
-    }
-    .card--image{
-        min-height: 62vh;
-    }
-}
-
-@media (min-height:700px) and (max-height:1000px){
-    .card{
-        height: 84vh;
-    }
-    .card--image{
-        min-height: 65vh;
     }
 }
