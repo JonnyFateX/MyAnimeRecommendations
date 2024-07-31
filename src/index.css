@@ -30,6 +30,13 @@ main{
   padding: 0 2.5em 0;
 }
 
+@media (max-width:500px) {
+  main{
+    justify-content: start;
+    padding-top: 1.5em;
+  }
+}
+
 /* elements */
 .web-icon{
   width: 2.2em;
