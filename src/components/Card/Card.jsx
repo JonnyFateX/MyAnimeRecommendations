@@ -1,10 +1,15 @@
 import { FaStar } from "react-icons/fa";
+import "./Card.css"
 
 export default function Card(props){
     const imgSrc = props.img
     const title = props.title
     const rating = props.rating
-    const genres = props.genres.join(", ")
+    const genresArray= props.genres
+    if(genresArray.length>3){
+        genresArray.length = 3;
+    }
+    const genres = genresArray.join(", ")
     
     return (
         <div className="card">
