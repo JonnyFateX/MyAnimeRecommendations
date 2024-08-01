@@ -21,12 +21,13 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
 
 const animesCollectionRef = collection(db, "animes")
-const documentCount = await getCountFromServer(animesCollectionRef)
-    .then(snapshot => snapshot.data().count)
+
 
 export async function getAnimes(){
-    const animes = []
+    const documentCount = await getCountFromServer(animesCollectionRef)
+    .then(snapshot => snapshot.data().count)
 
+    const animes = []
     for(let i=0; i < 10; i++){
         const randomId = getRandomNumberInInterval(1, documentCount)
         const anime = await getDoc(doc(db, "animes", randomId.toString()))
