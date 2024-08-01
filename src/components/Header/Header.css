@@ -1,22 +1,102 @@
 header{
-    height: 7vh;
     display: flex;
     align-items: center;
-    gap: 0.5em;
     color: #222222;
     background-color: whitesmoke;
     border-bottom: 0.5px solid gray;
     font-family: "Raleway", sans-serif;
 }
 
+.title-container{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.title-container > h1::before{
+    content: "MyAnimeRecommendations";
+}
+
+.menu-button{
+    display: none;
+    margin-left: auto;
+    border: none;
+    background-color: transparent;
+    color: #222222;
+    cursor: pointer;
+}
+
+
+
+nav > ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+}
+
+.header-link{
+    margin: none;
+    color: #222222;
+    text-decoration: none;
+}
+
+.web-icon{
+    width: 2.2em;
+    object-fit: cover;
+    scale: 1.5;
+    margin-right: 0.5em;
+}
+
+.navigation-icon{
+    display: flex;
+    color: #222222;
+    font-size: 1.8rem;
+}
+
 @media (max-width:500px){
     header{
+        flex-direction: column;
+        align-items: center;
+    }
+    .title-container{
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+    .title-container > h1::before{
+        content: "MAR";
+    }
+    .menu-button{
+        display: block;
+    }
+    nav{
+        width: 100%;
+    }
+    nav > ul{
+        flex-direction: column;
+    }
+    ul > li{
+        width: 100%;
+        border-top: 1px solid gray;
+    }
+    .header-link{
+        display: flex;
         justify-content: center;
+        padding: 10px;
     }
 }
 
 @media (min-width:500px){
     header{
         padding: 0 1em;
+    }
+    nav{
+        display: block;
+        margin-left: auto;
+    }
+    ul > li{
+        margin-left: 2em;
     }
 }
