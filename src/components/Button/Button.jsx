@@ -1,5 +1,3 @@
-import "./Button.css"
-
 export default function Button({onClick, position, children}){
     return (
         <button 

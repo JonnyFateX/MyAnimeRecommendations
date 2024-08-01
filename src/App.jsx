@@ -38,13 +38,14 @@ export default function App() {
             {...animes[animeIndex]}
           >
             <Button position="bottom-left" onClick={() => provideNextAnime()}>
-              <Button.Icon color="red">
-                <FaXmark size="1.2em"/>
+              <Button.Icon>
+                <FaXmark size="28px" style={{color:"red"}}
+                />
               </Button.Icon>
             </Button>
             <Button position="bottom-right" onClick={() => provideNextAnime()}>
-              <Button.Icon color="green">
-                <ImCheckmark size="1.2em"/>
+              <Button.Icon>
+                <ImCheckmark size="28px" style={{color:"green"}}/>
               </Button.Icon>
             </Button>
           </Card>
