@@ -6,13 +6,16 @@ import { IoIosMenu } from "react-icons/io";
 
 export default function Header(){
     const [visible, setVisibility] = React.useState(false)
+    const [headerText, setHeaderText] = React.useState("MyAnimeRecommendations")
 
     function updateDisplay(width){
         if(width > 500){
+            setHeaderText("MyAnimeRecommendations")
             if(!visible){
                 setVisibility(true)
             }
         } else{
+            setHeaderText("MAR")
             setVisibility(false)
         }
     }
@@ -34,7 +37,7 @@ export default function Header(){
         <header>
             <div className="title-container">
                 <img className="web-icon" src="../assets/icons/cloud.svg" alt="cloud icon" />
-                <h1></h1>
+                <h1>{headerText}</h1>
                 <button onClick={changeVisibility} className="menu-button">
                     <IoIosMenu  className="navigation-icon"/>
                 </button>
