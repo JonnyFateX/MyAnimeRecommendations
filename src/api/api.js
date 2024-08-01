@@ -1,11 +1,11 @@
-export async function getAnimes(){
+export async function getAnimes(type){
     const url="https://api.jikan.moe/v4/anime"
     const parameters={
-        type: "movie",
-        min_score:6.0,
-        order_by:"score",
-        sort:"desc",
-        sfw:"true",
+        type: type,
+        min_score: 6.0,
+        order_by: "score",
+        sort: "desc",
+        sfw: "true",
         page: 1
     }
     const queryParameters = new URLSearchParams(parameters)
@@ -13,7 +13,7 @@ export async function getAnimes(){
     let responseJSON = await response.json()
 
     const animes = responseJSON.data.map(anime => {
-        const title = anime.title
+        const title = anime.title_english
         const rating = anime.score
         const img = anime.images.jpg.large_image_url
         const genreList=anime.genres

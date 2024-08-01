@@ -10,10 +10,13 @@ import { ImCheckmark } from "react-icons/im";
 export default function App() {
   const [animes, setAnimes] = React.useState(null)
   const [animeIndex, setAnimeIndex] = React.useState(0)
+  const [searchType, setSearchType] = React.useState("tv")
 
   React.useEffect(()=>{
-    getAnimes()
+    if(searchType){
+      getAnimes(searchType)
       .then(animeObjects => setAnimes([...animeObjects]))
+    }
   }, [])
 
   function provideNextAnime(action){
