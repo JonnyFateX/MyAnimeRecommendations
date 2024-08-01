@@ -39,12 +39,12 @@ export default function App() {
           >
             <Button position="bottom-left" onClick={() => provideNextAnime()}>
               <Button.Icon color="red">
-                <FaXmark/>
+                <FaXmark size="1.2em"/>
               </Button.Icon>
             </Button>
             <Button position="bottom-right" onClick={() => provideNextAnime()}>
               <Button.Icon color="green">
-                <ImCheckmark/>
+                <ImCheckmark size="1.2em"/>
               </Button.Icon>
             </Button>
           </Card>
