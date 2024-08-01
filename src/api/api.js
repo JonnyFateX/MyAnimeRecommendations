@@ -1,5 +1,12 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { 
+    getFirestore, 
+    collection, 
+    doc, 
+    getDoc,
+    getCountFromServer,
+} from "firebase/firestore"
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyATIPrcJimG0v5ABULU2jZkZ5dr1KPkmQM",
@@ -11,74 +18,51 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app)
 
-export async function getAnimes(type){
-    const url="https://api.jikan.moe/v4/anime"
-    const parameters={
-        type: type,
-        min_score: 6.0,
-        order_by: "mal_id",
-        sort: "asc",
-        sfw: "true",
-        limit: 5,
+const animesCollectionRef = collection(db, "animes")
+const documentCount = await getCountFromServer(animesCollectionRef)
+    .then(snapshot => snapshot.data().count)
+
+export async function getAnimes(){
+    const animes = []
+
+    for(let i=0; i < 10; i++){
+        const randomId = getRandomNumberInInterval(1, documentCount)
+        const anime = await getDoc(doc(db, "animes", randomId.toString()))
+            .then(snapshot => snapshot.data())
+        animes.push(anime)
     }
 
-    let animes = []
-    let pageTotal = 1
-    
-    for(let i=0; i < 3 ; i++){
-        if(i !== 0){
-            const queryParameters = 
-                new URLSearchParams({
-                    ...parameters, 
-                    page: getRandomNumber(1, pageTotal)
-                }
-            )
-            const response = await fetch(`${url}?${queryParameters}`)
-            const responseJSON = await response.json()
-            
-            animes = [...animes, ...getAnimeObjects(responseJSON.data)]
-        } else{
-            const queryParameters = 
-                new URLSearchParams({
-                    ...parameters, 
-                    page: getRandomNumber(1, 200)
-                }
-            )
-            const response = await fetch(`${url}?${queryParameters}`)
-            const responseJSON = await response.json()
-            animes = [...animes, ...getAnimeObjects(responseJSON.data)]
-            pageTotal = Number(responseJSON.pagination.last_visible_page)
-        }
-
-    }
     return animes
-    
 }
 
-function getAnimeObjects(data){
-    return data.map(anime => {
-        const title = anime.title_english? anime.title_english : anime.title
-        const rating = anime.score
-        const img = anime.images.jpg.large_image_url
-        const genreList=anime.genres
-
-        if(!title || !rating || !img || !genreList){
-            console.log(anime)
-            return
-        }
-
-        const genres=genreList.map(genre => genre.name)
-
-        return {
-            title: title,
-            genres: genres,
-            img: img,
-            rating: rating
-        }
-    })
+function getRandomNumberInInterval(min, max) {
+    const ms = new Date().getMilliseconds()/1000
+    return Math.floor(Math.random() * ms * (max - min + 1) + min);
 }
 
-function getRandomNumber(min, max) { 
-    return Math.floor(Math.random() * (max - min + 1) + min);
+function getAnimeObject(anime){
+    const title = anime.title_english? anime.title_english : anime.title
+    const rating = anime.score
+    const img = anime.images.jpg.large_image_url
+    const genreList = anime.genres
+
+    const malId = anime.mal_id
+    const malURL = anime.url
+
+    if(!title || !rating || !img || !genreList){
+        return
+    }
+
+    const genres=genreList.map(genre => genre.name)
+
+    return {
+        title: title,
+        genres: genres,
+        img: img,
+        rating: rating,
+        malId: malId,
+        malURL: malURL
+    }
 }
