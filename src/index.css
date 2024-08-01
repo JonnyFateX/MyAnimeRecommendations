@@ -32,8 +32,8 @@ main{
 
 @media (max-width:500px) {
   main{
-    justify-content: start;
-    padding-top: 1.5em;
+    /*justify-content: start;*/
+    padding-bottom: 2em;
   }
 }
 
