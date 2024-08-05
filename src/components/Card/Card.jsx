@@ -2,7 +2,7 @@ import { FaStar } from "react-icons/fa";
 import "./Card.css"
 
 export default function Card(props){
-    const imgSrc = props.img
+    const img = props.img
     const title = props.title
     const rating = props.rating
     const genresArray= props.genres
@@ -13,7 +13,7 @@ export default function Card(props){
     
     return (
         <div className="card">
-            <img className="card--image" src={imgSrc}/>
+            {img}
             <div className="card--info">
                 <div className="card--text">
                     <h2>{title}</h2>

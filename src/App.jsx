@@ -9,26 +9,34 @@ import { ImCheckmark } from "react-icons/im";
 
 export default function App() {
   const [animes, setAnimes] = React.useState(null)
-  const [animeIndex, setAnimeIndex] = React.useState(0)
   const [searchType, setSearchType] = React.useState("tv")
 
   React.useEffect(()=>{
     if(searchType){
-      getAnimes(searchType)
-      .then(animeObjects => setAnimes([...animeObjects]))
+      getAnimes(searchType, 2)
+      .then(animeObjects => {
+        const animes = animeObjects.map(animeObject => {
+          return {
+            ...animeObject,
+            img: (<img className="card--image" src={animeObject.img}/>)
+          }
+        }) 
+        setAnimes(animes)
+      })
     }
   }, [])
 
   function provideNextAnime(action){
-    //Add functionality according to action - pendent
-
-    setAnimeIndex(prevIndex => {
-      if(prevIndex === animes.length - 1){
-        return 0
-      } else{
-        return (prevIndex+1)
-      }
-    })
+    getAnimes(searchType, 2)
+      .then(animeObjects => setAnimes(prevAnimes => {
+        const animes = animeObjects.map(animeObject => {
+          return {
+            ...animeObject,
+            img: (<img className="card--image" src={animeObject.img}/>)
+          }
+        }) 
+        return [prevAnimes[1], ...animes]
+      }))
   }
 
   return (
@@ -38,7 +46,7 @@ export default function App() {
         {
         animes?
           <Card
-            {...animes[animeIndex]}
+            {...animes[0]}
           >
             <Button position="bottom-left" onClick={() => provideNextAnime()}>
               <Button.Icon>

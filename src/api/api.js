@@ -23,12 +23,12 @@ const db = getFirestore(app)
 const animesCollectionRef = collection(db, "animes")
 
 
-export async function getAnimes(){
+export async function getAnimes(searchType, numberOfAnimes = 1){
     const documentCount = await getCountFromServer(animesCollectionRef)
     .then(snapshot => snapshot.data().count)
 
     const animes = []
-    for(let i=0; i < 10; i++){
+    for(let i=0; i < numberOfAnimes; i++){
         const randomId = getRandomNumberInInterval(1, documentCount)
         const anime = await getDoc(doc(db, "animes", randomId.toString()))
             .then(snapshot => snapshot.data())
