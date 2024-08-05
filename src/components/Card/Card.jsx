@@ -1,31 +1,39 @@
 import { FaStar } from "react-icons/fa";
-import "./Card.css"
+import { FaXmark } from "react-icons/fa6";
+import { ImCheckmark } from "react-icons/im";
 
-export default function Card(props){
-    const img = props.img
-    const title = props.title
-    const rating = props.rating
-    const genresArray= props.genres
+import "./Card.css"
+import './Button.css'
+
+export default function Card({img, title, rating, genres, onClick}){
+    const genresArray = genres
     if(genresArray.length>3){
         genresArray.length = 3;
     }
-    const genres = genresArray.join(", ")
-    
+   
     return (
         <div className="card">
             {img}
+
             <div className="card--info">
                 <div className="card--text">
                     <h2>{title}</h2>
-                    <h3>{genres}</h3>
+                    <h3>{genresArray.join(", ")}</h3>
                 </div>
                 <div className="rating-container">
                     <FaStar size="1.6rem" color="gold"/>
                     <p>{rating}</p>
                 </div>
             </div>
+
+            <button onClick={() => onClick()} className="btn bottom-left">
+                <FaXmark size="28px" style={{color:"red"}} className="icon"/>
+            </button>
+
+            <button onClick={() => onClick()} className="btn bottom-right">
+                <ImCheckmark size="28px" style={{color:"green"}}/>
+            </button>
             
-            {props.children}
         </div>
     )
 }

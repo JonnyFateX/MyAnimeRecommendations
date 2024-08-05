@@ -1,11 +1,7 @@
 import React from 'react'
 import Header from './components/Header/Header.jsx'
 import Card from './components/Card/Card.jsx'
-import Button from './components/Button/index.js'
 import { getAnimes } from './api/api.js'
-
-import { FaXmark } from "react-icons/fa6";
-import { ImCheckmark } from "react-icons/im";
 
 export default function App() {
   const [animes, setAnimes] = React.useState(null)
@@ -49,25 +45,11 @@ export default function App() {
       <Header/>
       <main>
         {
-        animes?
-          <Card
-            {...animes[0]}
-          >
-            <Button position="bottom-left" onClick={() => provideNextAnime()}>
-              <Button.Icon>
-                <FaXmark size="28px" style={{color:"red"}}
-                />
-              </Button.Icon>
-            </Button>
-            <Button position="bottom-right" onClick={() => provideNextAnime()}>
-              <Button.Icon>
-                <ImCheckmark size="28px" style={{color:"green"}}/>
-              </Button.Icon>
-            </Button>
-          </Card>
+          animes?
+          <Card {...animes[0]} onClick={provideNextAnime}/>
           :
           null
-      }
+        }
       </main>
     </>
   )
