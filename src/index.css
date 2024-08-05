@@ -22,7 +22,7 @@ h1, h2, h3, h4, p{
 }
 
 main{
-  height: 95dvh;
+  height: 85vh;
   min-width: 300px;
   display: flex;
   flex-direction: column;
