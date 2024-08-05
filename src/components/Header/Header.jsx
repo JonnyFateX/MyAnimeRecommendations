@@ -16,7 +16,9 @@ export default function Header(){
             }
         } else{
             setHeaderText("MAR")
-            setVisibility(false)
+            if(visible){
+                setVisibility(false)
+            } 
         }
     }
 
