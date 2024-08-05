@@ -32,12 +32,6 @@ main{
   padding: 0 2.5em 0;
 }
 
-@media (max-width:500px) {
-  main{
-    padding-bottom: 10%;
-  }
-}
-
 /* elements */
 h1{
   font-size: 1.2em;
