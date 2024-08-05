@@ -39,7 +39,7 @@ export default function Header(){
         <header>
             <div className="title-container">
                 <img className="web-icon" src="../assets/icons/cloud.svg" alt="cloud icon" />
-                <h1>{headerText}</h1>
+                <span>{headerText}</span>
                 <button onClick={changeVisibility} className="menu-button">
                     <IoIosMenu  className="navigation-icon"/>
                 </button>

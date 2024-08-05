@@ -1,9 +1,11 @@
 import React from 'react'
+import Home from './pages/Home/Home.jsx'
 import Header from './components/Header/Header.jsx'
 import Card from './components/Card/Card.jsx'
 import { getAnimes } from './api/api.js'
 
 export default function App() {
+  const [user, setUser] = React.useState(null)
   const [animes, setAnimes] = React.useState(null)
   const [searchType, setSearchType] = React.useState("tv")
 
@@ -39,6 +41,12 @@ export default function App() {
       setAnimes(prevAnimes => [prevAnimes[1]])
     } 
   }
+
+  if(!user){
+    return (
+      <Home onClick={() => setUser(true)}/>
+    )
+  }
   
   return (
     <>
@@ -53,4 +61,5 @@ export default function App() {
       </main>
     </>
   )
+
 }

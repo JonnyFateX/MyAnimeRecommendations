@@ -1,0 +1,41 @@
+.home-container{
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    font-family: "Raleway", sans-serif;
+}
+
+.home--title{
+    --r: 2em; /* control the cutout */
+    padding-right: 40vw;
+    line-height: 1.8;
+    clip-path: polygon(-100vw 0,100% 0,calc(100% - var(--r)) 50%,100% 100%,-100vw 100%);
+    background-color: #2E51A2;
+    width: fit-content;
+}
+
+.home--title > h1{
+    color: white;
+    font-size: 4rem;
+    font-weight: 700;
+    margin-left: 0.8em;
+}
+
+.home-container > p{
+    line-height: 1.5;
+    margin: 1em 1em 0 1em
+}
+
+.homeBtn{
+    display: inline;
+    padding: 0.5em 1em;
+    margin: 0.5em auto 0 1em;
+    color: white;
+    background-color: #2E51A2;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}

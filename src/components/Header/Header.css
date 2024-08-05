@@ -21,7 +21,7 @@ nav > ul{
     list-style-type: none;
 }
 
-/* components  */
+/* elements  */
 .menu-button{
     display: none;
     margin-left: auto;
@@ -35,6 +35,12 @@ nav > ul{
     margin: none;
     color: #222222;
     text-decoration: none;
+}
+
+.title-container > span {
+    font-size: 1.2em;
+    font-weight: 400;
+    letter-spacing: 0.5px;
 }
 
 /* icons  */

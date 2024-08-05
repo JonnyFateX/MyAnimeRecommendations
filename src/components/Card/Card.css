@@ -63,6 +63,24 @@
 }
 /* inside card--info */
 
+/* elements */
+h2{
+    color: #1D1D1D;
+    font-size: 1.6em;
+}
+
+h3{
+    color: #A3A3A3;
+    font-size: 1.2em;
+    font-weight: 400;
+}
+
+p{
+    font-size: 1.2em;
+    line-height: 1.2;
+}
+/* elements */
+
 /* media based on width */
 @media (max-width:500px) {
     .card{
