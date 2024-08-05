@@ -1,6 +1,10 @@
 .btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.2em;
+
   border: none;
-  padding-bottom: 0.2em;
   background-color: white;
   border-radius: 50%;
   height: 2em;
@@ -24,8 +28,4 @@
 .bottom-right{
   bottom: -1em;
   right: -1em;
-}
-
-.icon{
-  font-size: 28px;
 }
