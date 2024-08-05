@@ -28,10 +28,13 @@ export async function getAnimes(searchType, numberOfAnimes = 1){
     .then(snapshot => snapshot.data().count)
 
     const animes = []
-    for(let i=0; i < numberOfAnimes; i++){
+    for(let i = 0; i < numberOfAnimes; i++){
         const randomId = getRandomNumberInInterval(1, documentCount)
         const anime = await getDoc(doc(db, "animes", randomId.toString()))
-            .then(snapshot => snapshot.data())
+            .then(snapshot => {
+                const data = snapshot.data()
+                return {...data, rating: data.rating.toFixed(1)}
+            })
         animes.push(anime)
     }
 

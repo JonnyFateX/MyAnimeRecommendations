@@ -23,7 +23,7 @@ export default function App() {
   }, [])
 
   function provideNextAnime(action){
-    //if statement makes prevents multiple requests
+    //if statement prevents multiple requests
     if(animes.length > 1){
       getAnimes(searchType, 2)
       .then(animeObjects => setAnimes(prevAnimes => {
