@@ -27,7 +27,9 @@ export default function App() {
   }, [])
 
   function provideNextAnime(action){
-    getAnimes(searchType, 2)
+    //if statement makes prevents multiple requests
+    if(animes.length > 1){
+      getAnimes(searchType, 2)
       .then(animeObjects => setAnimes(prevAnimes => {
         const animes = animeObjects.map(animeObject => {
           return {
@@ -35,10 +37,13 @@ export default function App() {
             img: (<img className="card--image" src={animeObject.img}/>)
           }
         }) 
-        return [prevAnimes[1], ...animes]
+        return [...prevAnimes, ...animes]
       }))
+      //Provides next anime without waiting for fetch
+      setAnimes(prevAnimes => [prevAnimes[1]])
+    } 
   }
-
+  
   return (
     <>
       <Header/>
