@@ -1,5 +1,6 @@
 import React from 'react'
 import Home from './pages/Home/Home.jsx'
+import Login from './pages/Login/Login.jsx'
 import Header from './components/Header/Header.jsx'
 import Card from './components/Card/Card.jsx'
 import { getAnimes } from './api/api.js'
@@ -42,10 +43,23 @@ export default function App() {
     } 
   }
 
+  function logInUser(key){
+    if(!key){
+      setUser(null)
+    }
+    setUser(key)
+  }
+
+  if(user == null){
+    return (
+      <Home onClick={() => setUser(false)}/>
+    )
+  }
+
   if(!user){
     return (
-      <Home onClick={() => setUser(true)}/>
-    )
+      <Login logInUser={logInUser}/>
+   )
   }
   
   return (

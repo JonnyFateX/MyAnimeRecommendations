@@ -1,9 +1,10 @@
+import Background from '../../components/Background/Background'
 import './Home.css'
 
 export default function Home({onClick}){
     return (
       <>
-        <div className='background-image'></div>
+        <Background/>
         <div className='home-container'>
           <div className='home--content'>
             <div className='home--title'>
