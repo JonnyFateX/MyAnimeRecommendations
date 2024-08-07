@@ -3,7 +3,6 @@ import {
     getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    onAuthStateChanged
  } from "firebase/auth";
 
 const firebaseConfig = {
@@ -44,13 +43,12 @@ export async function createUser(email, password){
         });
 }
 
-export async function logInUser(){
+export async function logInUser(email, password){
     const auth = getAuth(app)
     return signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // Signed in 
             const user = userCredential.user;
-            // ...
+            return user
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -58,14 +56,13 @@ export async function logInUser(){
         });
 }
 
+const auth = getAuth(app)
+export async function logOutUser(){
+    const user = await auth.signOut()
+    return user
+}
+
 export function currentUser(){
     const auth = getAuth(app)
-    return onAuthStateChanged(auth, (user) => {
-        if (user) {
-            const uid = user.uid;
-            return user
-        } else {
-            return null
-        }
-});
+    return auth.currentUser;
 }

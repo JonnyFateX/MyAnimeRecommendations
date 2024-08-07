@@ -1,4 +1,5 @@
 import React from "react"
+import { logOutUser } from "../../auth/auth";
 import "./Header.css"
 
 import { PiUserCircleThin } from "react-icons/pi";
@@ -48,7 +49,7 @@ export default function Header(){
 				<ul>
 					<li><a className="header-link" href="">Watchlist</a></li>
 					<li>
-                        <a className="header-link" href="">
+                        <a className="header-link" onClick={logOutUser} href="">
                             <PiUserCircleThin className="navigation-icon"/>
                         </a>
                     </li>

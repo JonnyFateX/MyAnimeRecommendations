@@ -14,7 +14,7 @@ export default function Welcome(){
             <p>
               Get anime recommendations from MyAnimeList. 
             </p>
-            <Link className='get-started' to="/login">Get Started</Link>
+            <Link className='get-started' to="/home">Get Started</Link>
           </div>
         </div>
       </>

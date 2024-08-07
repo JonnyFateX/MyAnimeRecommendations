@@ -3,6 +3,7 @@ import Background from "../../components/Background/Background"
 import Form from "../../components/Form/Form.jsx"
 import { createUser, currentUser, User } from "../../auth/auth.js"
 import "./Register.css"
+import { useNavigate } from "react-router-dom"
 
 const formFields = [
     {
@@ -39,6 +40,7 @@ export default function Register(){
         password: ""
     })
     const [active, setStatus] = React.useState(false)
+    const navigate = useNavigate()
 
     function handleChange(event) {
         setFormData(prevFormData => {
@@ -51,7 +53,9 @@ export default function Register(){
 
     async function onSubmit(){
         let user = await createUser(formData.email, formData.password)
-        console.log(user)
+        if(user){
+            navigate("/home")
+        }
     }
 
     return (
