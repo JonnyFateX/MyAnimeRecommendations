@@ -1,6 +1,6 @@
 /* card */
 .form-card{
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     padding: 2em 1em;
     border-radius: 12px;
@@ -9,7 +9,6 @@
 
 .center-form{
     margin: auto 0;
-    padding: 2em;
     display: flex;
     flex-direction: column;
 }
@@ -62,7 +61,7 @@ input[type=password]::placeholder{
 
 /* submit button*/
 .form-btn{
-    width: 80%;
+    width: 100%;
     margin: 2em auto;
     padding: 1em;
     font-size: 1.2rem;
