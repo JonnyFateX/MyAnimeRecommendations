@@ -1,6 +1,7 @@
 import React from "react"
 import Background from "../../components/Background/Background"
 import Form from "../../components/Form/Form.jsx"
+import { createUser, currentUser, User } from "../../auth/auth.js"
 import "./Register.css"
 
 const formFields = [
@@ -26,11 +27,11 @@ const formFields = [
         name: "password",
         label: "Password",
         placeholder: "************",
-        type: "text"
+        type: "password"
     }
 ]
 
-export default function Register({registerUser}){
+export default function Register(){
     const [formData, setFormData] = React.useState({
         firstName: "", 
         lastName: "",
@@ -48,9 +49,9 @@ export default function Register({registerUser}){
         })
     }
 
-    function onSubmit(){
-        //...api
-        registerUser("key")
+    async function onSubmit(){
+        let user = await createUser(formData.email, formData.password)
+        console.log(user)
     }
 
     return (

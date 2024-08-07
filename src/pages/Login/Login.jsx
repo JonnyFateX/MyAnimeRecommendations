@@ -14,11 +14,11 @@ const formFields = [
         name: "password",
         label: "Password",
         placeholder: "************",
-        type: "text"
+        type: "password"
     }
 ]
 
-export default function Login({logInUser}){
+export default function Login(){
     const [formData, setFormData] = React.useState({email: "", password: ""})
     const [active, setStatus] = React.useState(false)
 
