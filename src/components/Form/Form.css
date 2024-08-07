@@ -1,16 +1,5 @@
-.login-container{
-    height: 100dvh;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    margin: 0;
-    padding: 1em 0;
-    display: flex;
-    flex-direction: column;
-}
-
-.login-card{
+/* card */
+.form-card{
     width: 80%;
     margin: 0 auto;
     padding: 2em 1em;
@@ -18,19 +7,20 @@
     background-color: #2E51A2;
 }
 
-.login-card > h1{
-    text-align: center;
-    font-size: 2rem;
-    color: white;
+.center-form{
+    margin: auto 0;
 }
 
+/* form */
 form{
     margin-top: 1em;
     display: flex;
     flex-direction: column;
 }
 
+/* form elements */
 label{
+    align-self: baseline;
     margin-top: 1em;
     font-size: 1.2rem;
     color: white;
@@ -42,7 +32,7 @@ input[type=text], input[type=password]{
     border: none;
     border-radius: 6px;
     background-color: whitesmoke;
-    color: gray;
+    color: #282828;
     outline-color:#2E51A2;
     font-size: 1.2rem;
 }
@@ -52,7 +42,23 @@ input[type=password]::placeholder{
     color: gray;
 }
 
-.btnLogin{
+/* link */
+.form-link-container{
+    margin-top: 1em;
+    color: white;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.form-link{
+    display: block;
+    color: #FFC036;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* submit button*/
+.form-btn{
     width: 80%;
     margin: 2em auto;
     padding: 1em;
@@ -65,16 +71,9 @@ input[type=password]::placeholder{
     color: white;
 }
 
-.register-container{
-    margin-top: 1em;
-    color: white;
-    line-height: 1.4;
+/* form header */
+.form-card > h1{
     text-align: center;
-}
-
-.register-link{
-    display: block;
-    color: #FFC036;
-    text-decoration: underline;
-    cursor: pointer;
+    font-size: 2rem;
+    color: white;
 }
