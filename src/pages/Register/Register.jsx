@@ -62,6 +62,7 @@ export default function Register({registerUser}){
                     onChange = {handleChange}
                     paragraphText = "Already have an account?"
                     linkContent = "Log in here."
+                    linkTo= "/login"
                     onSubmit = {onSubmit}
                     buttonContent = "Create account"
                 >

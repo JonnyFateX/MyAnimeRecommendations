@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom"
 import "./Form.css"
 
 export default function Form({
@@ -6,6 +7,7 @@ export default function Form({
     onChange,
     paragraphText,
     linkContent, 
+    linkTo,
     onSubmit,
     buttonContent, 
     children
@@ -35,7 +37,7 @@ export default function Form({
                 </form>
                 <p className="form-link-container">
                     {paragraphText}
-                    <a className="form-link">{linkContent}</a>
+                    <Link to={linkTo} className="form-link">{linkContent}</Link>
                 </p>
             </div>       
             <button className="form-btn" onClick={onSubmit}>{buttonContent}</button>

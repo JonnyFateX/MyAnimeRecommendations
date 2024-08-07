@@ -33,7 +33,6 @@ export default function Login({logInUser}){
 
     function onSubmit(){
         //...api
-        logInUser("key")
     }
 
     return (
@@ -45,6 +44,7 @@ export default function Login({logInUser}){
                     onChange = {handleChange}
                     paragraphText = "Don't have an account?"
                     linkContent = "Create one here."
+                    linkTo= "/register"
                     onSubmit = {onSubmit}
                     buttonContent = "Log in"
                 >

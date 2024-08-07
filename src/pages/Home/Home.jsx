@@ -1,21 +1,55 @@
-import Background from '../../components/Background/Background'
-import './Home.css'
+import Header from "../../components/Header/Header"
+import Card from "../../components/Card/Card"
+import { getAnimes } from '../../api/api.js'
 
-export default function Home({onClick}){
+export default function Home(){
+    const [animes, setAnimes] = React.useState(null)
+    const [searchType, setSearchType] = React.useState("tv")
+
+    React.useEffect(()=>{
+        if(searchType){
+            getAnimes(searchType, 2)
+            .then(animeObjects => {
+            const animes = animeObjects.map(animeObject => {
+                return {
+                ...animeObject,
+                img: (<img className="card--image" src={animeObject.img}/>)
+                }
+            }) 
+            setAnimes(animes)
+            })
+        }
+    }, [])
+
+    function provideNextAnime(action){
+        //if statement prevents multiple requests
+        if(animes.length > 1){
+            getAnimes(searchType, 2)
+            .then(animeObjects => setAnimes(prevAnimes => {
+            const animes = animeObjects.map(animeObject => {
+                return {
+                ...animeObject,
+                img: (<img className="card--image" src={animeObject.img}/>)
+                }
+            }) 
+            return [...prevAnimes, ...animes]
+            }))
+            //Provides next anime without waiting for fetch
+            setAnimes(prevAnimes => [prevAnimes[1]])
+        } 
+    }
+
     return (
-      <>
-        <Background/>
-        <div className='home-container'>
-          <div className='home--content'>
-            <div className='home--title'>
-              <h1>MAR</h1>
-            </div>
-            <p>
-              Get anime recommendations from MyAnimeList. 
-            </p>
-            <button className='homeBtn' onClick={onClick}>Get Started</button>
-          </div>
-        </div>
-      </>
-      )
+        <>
+            <Header/>
+            <main>
+            {
+                animes?
+                <Card {...animes[0]} onClick={provideNextAnime}/>
+                :
+                null
+            }
+            </main>
+        </>
+    )
 }

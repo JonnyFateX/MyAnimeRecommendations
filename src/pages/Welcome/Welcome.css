@@ -42,8 +42,8 @@
     margin: 1em 1em 0 1em
 }
 
-.homeBtn{
-    display: inline;
+.get-started{
+    text-decoration: none;
     padding: 0.5em 1em;
     margin: 0.5em auto 0 1em;
     color: white;
