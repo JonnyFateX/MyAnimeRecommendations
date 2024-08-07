@@ -64,3 +64,16 @@ input[type=password]::placeholder{
     border: none;
     color: white;
 }
+
+.register-container{
+    margin-top: 1em;
+    color: white;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.register-link{
+    color: #FFC036;
+    text-decoration: underline;
+    cursor: pointer;
+}

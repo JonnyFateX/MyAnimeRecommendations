@@ -42,7 +42,11 @@ export default function Login({logInUser}){
                             placeholder="*************"
                         />
                     </form>
-                </div>
+                    <p className="register-container">
+                        Don't have an account? 
+                        <a className="register-link">Create one.</a>
+                    </p>
+                </div>       
                 <button className="btnLogin" onClick={onSubmit}>Log in to MAR</button>
             </div>
         </>
