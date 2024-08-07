@@ -1,6 +1,22 @@
 import React from "react"
 import Background from "../../components/Background/Background"
+import Form from "../../components/Form/Form.jsx"
 import "./Login.css"
+
+const formFields = [
+    {
+        name: "email",
+        label: "Email Address",
+        placeholder: "recommendations@mar.com",
+        type: "text"
+    },
+    {
+        name: "password",
+        label: "Password",
+        placeholder: "************",
+        type: "text"
+    }
+]
 
 export default function Login({logInUser}){
     const [formData, setFormData] = React.useState({email: "", password: ""})
@@ -24,30 +40,16 @@ export default function Login({logInUser}){
         <>
             <Background/>
             <div className="login-container">
-                <div className="login-card">
-                    <h1>Login</h1>
-                    <form>
-                        <label htmlFor="email">Email address</label>
-                        <input 
-                            type="text" 
-                            name="email" 
-                            onChange={handleChange}
-                            placeholder="anime@mar.com"
-                            />
-                        <label htmlFor="password">Password</label>
-                        <input 
-                            type="password" 
-                            name="password" 
-                            onChange={handleChange}
-                            placeholder="*************"
-                        />
-                    </form>
-                    <p className="register-container">
-                        Don't have an account? 
-                        <a className="register-link">Create one.</a>
-                    </p>
-                </div>       
-                <button className="btnLogin" onClick={onSubmit}>Log in to MAR</button>
+                <Form
+                    fields = {formFields}
+                    onChange = {handleChange}
+                    paragraphText = "Don't have an account?"
+                    linkContent = "Create one here."
+                    onSubmit = {onSubmit}
+                    buttonContent = "Log in"
+                >
+                    <h1>Enter MAR</h1>
+                </Form>
             </div>
         </>
     )

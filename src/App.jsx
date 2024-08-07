@@ -48,19 +48,28 @@ export default function App() {
     if(!key){
       setUser(null)
     }
-    setUser(key)
+    if(user === 1){
+      setUser(2)
+    }
+    if(user === 2){
+      setUser(3)
+    }
   }
 
   if(user == null){
     return (
-      <Home onClick={() => setUser(false)}/>
+      <Home onClick={() => setUser(1)}/>
     )
   }
 
-  if(!user){
-    /*return (
+  if(user === 1){
+    return (
       <Login logInUser={logInUser}/>
-   )*/
+   )
+    
+  }
+
+  if(user === 2){
     return (
       <Register registerUser={logInUser}/>
     )

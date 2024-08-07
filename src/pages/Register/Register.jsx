@@ -1,7 +1,6 @@
 import React from "react"
 import Background from "../../components/Background/Background"
 import Form from "../../components/Form/Form.jsx"
-
 import "./Register.css"
 
 const formFields = [

@@ -9,6 +9,8 @@
 
 .center-form{
     margin: auto 0;
+    display: flex;
+    flex-direction: column;
 }
 
 /* form */
