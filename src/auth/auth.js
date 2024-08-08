@@ -53,8 +53,6 @@ export async function createUser(email, password, firstName, lastName){
             setDoc(doc(db, "users", user.uid), {
                 firstName: firstName,
                 lastName: lastName,
-                saved_animes: [],
-                ignored_animes: []
             });
         }
     
@@ -79,5 +77,14 @@ export async function logOutUser(){
 }
 
 export function currentUser(){
-    return auth.currentUser;
+    const user = auth.currentUser
+    if(user){
+        return new User(
+                user.email,
+                user.uid,
+                user.displayName,
+            )
+    }
+    return null
+    
 }

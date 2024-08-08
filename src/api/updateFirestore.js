@@ -50,3 +50,30 @@
     //Add anime Doc to collection
     await setDoc(doc(db, "animes", index.toString()), anime);
 }*/
+
+/*
+function getAnimeObject(anime){
+    const title = anime.title_english? anime.title_english : anime.title
+    const rating = anime.score
+    const img = anime.images.jpg.large_image_url
+    const genreList = anime.genres
+
+    const malId = anime.mal_id
+    const malURL = anime.url
+
+    if(!title || !rating || !img || !genreList){
+        return
+    }
+
+    const genres=genreList.map(genre => genre.name)
+
+    return {
+        title: title,
+        genres: genres,
+        img: img,
+        rating: rating,
+        malId: malId,
+        malURL: malURL
+    }
+}
+    */

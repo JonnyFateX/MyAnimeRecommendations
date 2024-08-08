@@ -26,13 +26,13 @@ export default function Card({img, title, rating, genres, onClick}){
                 </div>
             </div>
 
-            <button onClick={() => onClick()} className="btn bottom-left">
+            <button onClick={() => onClick("ignore")} className="btn bottom-left">
                 <div>
                     <FaXmark size="28px" style={{color:"red"}}/>
                 </div>
             </button>
 
-            <button onClick={() => onClick()} className="btn bottom-right">
+            <button onClick={() => onClick("watchlist")} className="btn bottom-right">
                 <div>
                     <ImCheckmark size="28px" style={{color:"green"}}/>
                 </div>

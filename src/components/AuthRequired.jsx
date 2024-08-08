@@ -4,7 +4,7 @@ import { currentUser } from "../auth/auth"
 
 export default function AuthRequired() {
     const user = currentUser()
-    
+
     if (!user) {
         return (
             <Navigate 

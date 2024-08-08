@@ -1,12 +1,14 @@
 import { initializeApp } from "firebase/app";
+import { currentUser } from "../auth/auth";
 import { 
     getFirestore, 
     collection, 
     doc, 
     getDoc,
+    updateDoc,
+    arrayUnion,
     getCountFromServer,
 } from "firebase/firestore"
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyATIPrcJimG0v5ABULU2jZkZ5dr1KPkmQM",
@@ -22,18 +24,27 @@ const db = getFirestore(app)
 
 const animesCollectionRef = collection(db, "animes")
 
-
 export async function getAnimes(searchType, numberOfAnimes = 1){
+    const excludeList = await getUserAnimes()
+    //Get number of documents
     const documentCount = await getCountFromServer(animesCollectionRef)
-    .then(snapshot => snapshot.data().count)
+        .then(snapshot => snapshot.data().count)
+    //Create array from 0 to documentCount  [1, 2, 3, ..., documentCount]
+    const documentIds = [...Array(documentCount).keys()].map(i => i+1)
+    //Removes excluded elements from previous array
+    const filteredDocumentIds = documentIds.filter((id) => !excludeList.includes(id.toString()))
 
     const animes = []
     for(let i = 0; i < numberOfAnimes; i++){
-        const randomId = getRandomNumberInInterval(1, documentCount)
-        const anime = await getDoc(doc(db, "animes", randomId.toString()))
+        const randomId = getRandomNumberInInterval(1, filteredDocumentIds.length)
+        const anime = await getDoc(doc(db, "animes", filteredDocumentIds[randomId].toString()))
             .then(snapshot => {
                 const data = snapshot.data()
-                return {...data, rating: data.rating.toFixed(1)}
+                return {
+                    ...data, 
+                    rating: data.rating.toFixed(1),
+                    firebaseId: snapshot.id
+                }
             })
         animes.push(anime)
     }
@@ -41,32 +52,33 @@ export async function getAnimes(searchType, numberOfAnimes = 1){
     return animes
 }
 
+export async function addToWatchList(animeId){
+    await updateDoc(getUserDocRef(), {
+        watch_list: arrayUnion(animeId)
+    })
+}
+
+export async function addToIgnoredList(animeId){ 
+    await updateDoc(getUserDocRef(), {
+        ignored_list: arrayUnion(animeId)
+    })
+}
+
+async function getUserAnimes(){
+    const snapshot = await getDoc(getUserDocRef())
+    const userAnimes = [
+        ...snapshot.data().watch_list, 
+        ...snapshot.data().ignored_list
+    ]
+    return userAnimes
+}
+
+function getUserDocRef(){
+    const user = currentUser()
+    return doc(db, "users", user.uid);
+}
+
 function getRandomNumberInInterval(min, max) {
     const ms = new Date().getMilliseconds()/1000
     return Math.floor(Math.random() * ms * (max - min + 1) + min);
-}
-
-function getAnimeObject(anime){
-    const title = anime.title_english? anime.title_english : anime.title
-    const rating = anime.score
-    const img = anime.images.jpg.large_image_url
-    const genreList = anime.genres
-
-    const malId = anime.mal_id
-    const malURL = anime.url
-
-    if(!title || !rating || !img || !genreList){
-        return
-    }
-
-    const genres=genreList.map(genre => genre.name)
-
-    return {
-        title: title,
-        genres: genres,
-        img: img,
-        rating: rating,
-        malId: malId,
-        malURL: malURL
-    }
 }
