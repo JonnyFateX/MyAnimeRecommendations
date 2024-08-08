@@ -3,7 +3,14 @@ import {
     getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    
  } from "firebase/auth";
+
+ import {
+    getFirestore,
+    setDoc,
+    doc
+ } from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: "AIzaSyATIPrcJimG0v5ABULU2jZkZ5dr1KPkmQM",
@@ -15,24 +22,24 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app)
+const db = getFirestore(app)
 
 export class User{
-    constructor(email, accessToken, displayName) {
+    constructor(email, uid, displayName) {
         this.email = email
-        this.accessToken = accessToken
+        this.uid = uid
         this.displayName = displayName
     }
 }
 
-export async function createUser(email, password){
-    const auth = getAuth(app)
-    return createUserWithEmailAndPassword(auth, email, password)
+export async function createUser(email, password, firstName, lastName){
+    const user = await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // Signed up 
             const user = userCredential.user;
             return new User(
                 user.email,
-                user.accessToken,
+                user.uid,
                 user.displayName,
             )
         })
@@ -41,10 +48,20 @@ export async function createUser(email, password){
             const errorMessage = error.message;
             // ..
         });
+
+        if(user){
+            setDoc(doc(db, "users", user.uid), {
+                firstName: firstName,
+                lastName: lastName,
+                saved_animes: [],
+                ignored_animes: []
+            });
+        }
+    
+        return user
 }
 
 export async function logInUser(email, password){
-    const auth = getAuth(app)
     return signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user;
@@ -56,13 +73,11 @@ export async function logInUser(email, password){
         });
 }
 
-const auth = getAuth(app)
 export async function logOutUser(){
     const user = await auth.signOut()
     return user
 }
 
 export function currentUser(){
-    const auth = getAuth(app)
     return auth.currentUser;
 }

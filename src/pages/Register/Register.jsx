@@ -85,7 +85,12 @@ export default function Register(){
     }
 
     async function onSubmit(){
-        let user = await createUser(formData.email, formData.password)
+        let user = await createUser(
+            formData.email, 
+            formData.password,
+            formData.firstName,
+            formData.lastName
+        )
         if(user){
             navigate("/home")
         }
