@@ -9,10 +9,10 @@ export default function Form({
     linkContent, 
     linkTo,
     onSubmit,
-    buttonContent, 
+    buttonContent,
+    disabled,
     children
 }){
-
     const fieldElements = fields.map((field, index) => {
         return (
             <React.Fragment key={"field" + index}>
@@ -22,7 +22,6 @@ export default function Form({
                     name = {field.name} 
                     onChange = {onChange}
                     placeholder = {field.placeholder}
-                    
                     />
             </React.Fragment>
         )
@@ -40,7 +39,11 @@ export default function Form({
                     <Link to={linkTo} className="form-link">{linkContent}</Link>
                 </p>
             </div>       
-            <button className="form-btn" onClick={onSubmit}>{buttonContent}</button>
+            <button 
+                className = "form-btn" 
+                onClick = {onSubmit}
+                disabled = {disabled}
+                >{buttonContent}</button>
         </div>
     )
 }

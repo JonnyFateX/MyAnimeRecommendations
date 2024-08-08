@@ -1,7 +1,7 @@
 import React from "react"
 import Background from "../../components/Background/Background"
 import Form from "../../components/Form/Form.jsx"
-import { createUser, currentUser, User } from "../../auth/auth.js"
+import { createUser } from "../../auth/auth.js"
 import "./Register.css"
 import { useNavigate } from "react-router-dom"
 
@@ -22,7 +22,7 @@ const formFields = [
         name: "email",
         label: "Email Address",
         placeholder: "recommendations@mar.com",
-        type: "text"
+        type: "email"
     },
     {
         name: "password",
@@ -39,16 +39,49 @@ export default function Register(){
         email: "", 
         password: ""
     })
-    const [active, setStatus] = React.useState(false)
+    const [disabled, setDisabled] = React.useState(true)
     const navigate = useNavigate()
 
     function handleChange(event) {
         setFormData(prevFormData => {
-            return {
+            let newFormData = {
                 ...prevFormData,
                 [event.target.name]: event.target.value
             }
-        })
+
+            const keysArray = Object.keys(newFormData);
+            let formNotEmpty = false
+            keysArray.forEach(key => {
+                if(newFormData[key] !== ""){
+                    formNotEmpty = true
+                }
+            })
+            let emailTruthy = emailValidator(newFormData.email)
+            let passwordTruthy = passwordValidator(newFormData.password)
+
+            //Activates button
+            if(emailTruthy && passwordTruthy && formNotEmpty){
+                setDisabled(false)
+            } else{
+                setDisabled(true)
+            }
+
+            return newFormData
+        })   
+    }
+
+    function emailValidator(email){
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    }
+
+    function passwordValidator(password){
+        const containsNumber = /\d/.test(password)
+        const containsSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        const longEnough = password.length > 8
+        if(longEnough && containsNumber && containsSpecial){
+            return true
+        }
+        return false
     }
 
     async function onSubmit(){
@@ -57,6 +90,7 @@ export default function Register(){
             navigate("/home")
         }
     }
+    
 
     return (
         <>
@@ -70,6 +104,7 @@ export default function Register(){
                     linkTo= "/login"
                     onSubmit = {onSubmit}
                     buttonContent = "Create account"
+                    disabled = {disabled}
                 >
                     <h1>Create a new account</h1>
                 </Form>
