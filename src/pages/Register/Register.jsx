@@ -76,7 +76,7 @@ export default function Register(){
 
     function passwordValidator(password){
         const containsNumber = /\d/.test(password)
-        const containsSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        const containsSpecial = /[!@#$%^&*(),.?":{}|<>+-]/.test(password);
         const longEnough = password.length > 8
         if(longEnough && containsNumber && containsSpecial){
             return true
